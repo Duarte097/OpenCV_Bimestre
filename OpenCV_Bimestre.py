@@ -20,7 +20,6 @@ class OpenCV_Bimestre:
         subframe = ctk.CTkFrame(master=master_frame)
         subframe.grid(row=1, column=1, padx=10, pady=10)    
 
-        # Posicionamento dos widgets na grade
         self.bt_imgoriginal = ctk.CTkButton(master=master_frame, text="Load Image", command=self.imagemOriginal)
         self.bt_imgoriginal.grid(row=0, column=0, padx=5, pady=5, sticky="s")
         
@@ -36,7 +35,6 @@ class OpenCV_Bimestre:
 
 
 
-        # Caixas para exibir as imagens
         self.canvas_original = ctk.CTkCanvas(master=master_frame, width=500, height=500, bd=5, highlightbackground="blue")
         self.canvas_original.grid(row=1, column=0, padx=10, pady=10, sticky="w")
 
@@ -46,7 +44,6 @@ class OpenCV_Bimestre:
         self.salvar = ctk.CTkButton(master=master_frame, text="Salvar", command= self.save)
         self.salvar.grid(row=3, column=2, padx=5, pady=5, sticky="e")
 
-        # Variáveis de instância adicionadas
         self.image = None
         self.gray_image = None
         self.filtered_image = None
@@ -74,7 +71,6 @@ class OpenCV_Bimestre:
             self.Morphology()
 
     def imagemOriginal(self):
-        # Carregar a imagem
         file_path = filedialog.askopenfilename()
         if file_path:
             self.image = cv2.imread(file_path)
@@ -108,7 +104,6 @@ class OpenCV_Bimestre:
         if self.files:
             file = filedialog.asksaveasfile(filetypes=(("PNG file", "*.png"),("All Files", "*.*")), defaultextension =".png")
             if file:
-                # Convertendo a imagem PIL de volta para o formato de arquivo
                 self.files.save(file.name)
 
         
@@ -125,16 +120,9 @@ class OpenCV_Bimestre:
       
     def Gaussian(self):
         if self.image is not None:
-            # Aplicando o filtro gaussiano com um desvio padrão de 1.5
             self.filtered_image = gaussian_filter(self.image, sigma=1.5)
-            
-            # Convertendo a imagem de volta para o formato PIL
             self.image_pil = Image.fromarray(np.uint8(self.filtered_image))
-            
-            # Exibindo a imagem no canvas
             self.show_image_on_canvas2(self.image_pil)
-            
-            # Salvando a imagem filtrada
             self.files = self.image_pil
         else:
             print("Nenhuma imagem em tons de cinza disponível.")
