@@ -39,7 +39,7 @@ class OpenCV_Bimestre:
         self.canvas_original.grid(row=1, column=0, padx=10, pady=10, sticky="w")
 
         self.canvas_modicado = ctk.CTkCanvas(master=master_frame, width=500, height=500, bd=5, highlightbackground="blue")
-        self.canvas_modicado.grid(row=1, column=2, padx=10, pady=10, columnspan=2,  sticky="e")  # Estender por duas colunas
+        self.canvas_modicado.grid(row=1, column=2, padx=10, pady=10, columnspan=2,  sticky="e") 
         
         self.salvar = ctk.CTkButton(master=master_frame, text="Salvar", command= self.save)
         self.salvar.grid(row=3, column=2, padx=5, pady=5, sticky="e")
@@ -80,13 +80,13 @@ class OpenCV_Bimestre:
     def show_image_on_canvas(self):
         image_rgb = cv2.cvtColor(self.image, cv2.COLOR_BGR2RGB)
         image_pil = Image.fromarray(image_rgb)
-        image_pil_resized = self.resize_image_to_canvas(image_pil, (500, 500))  # Redimensionar imagem para o tamanho do canvas
+        image_pil_resized = self.resize_image_to_canvas(image_pil, (500, 500))   
         self.image_tk = ImageTk.PhotoImage(image_pil_resized)
         self.canvas_original.delete("all")
         self.canvas_original.create_image(0, 0, anchor="nw", image=self.image_tk)
 
     def show_image_on_canvas2(self, image):
-        image_pil_resized = self.resize_image_to_canvas(image, (500, 500))  # Redimensionar imagem para o tamanho do canvas
+        image_pil_resized = self.resize_image_to_canvas(image, (500, 500))  
         image_tk = ImageTk.PhotoImage(image_pil_resized)
         self.canvas_modicado.delete("all")
         self.canvas_modicado.create_image(0, 0, anchor="nw", image=image_tk)
